@@ -1,5 +1,5 @@
 {
-  "name": "normalizr",
+  "name": "normalizr-gre",
   "version": "3.2.4",
   "description": "Normalizes and denormalizes JSON according to schema for Redux and Flux applications",
   "bugs": {

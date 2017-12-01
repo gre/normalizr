@@ -59,6 +59,10 @@ const unvisitEntity = (id, schema, unvisit, getEntity, cache) => {
     return entity;
   }
 
+  if (schema.cache.has(entity)) {
+    return schema.cache.get(entity);
+  }
+
   if (!cache[schema.key]) {
     cache[schema.key] = {};
   }
@@ -70,7 +74,9 @@ const unvisitEntity = (id, schema, unvisit, getEntity, cache) => {
     // Need to set this first so that if it is referenced further within the
     // denormalization the reference will already exist.
     cache[schema.key][id] = entityCopy;
-    cache[schema.key][id] = schema.denormalize(entityCopy, unvisit);
+    const obj = schema.denormalize(entityCopy, unvisit);
+    cache[schema.key][id] = obj;
+    schema.cache.set(entity, obj);
   }
 
   return cache[schema.key][id];

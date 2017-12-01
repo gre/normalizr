@@ -17,6 +17,7 @@ export default class EntitySchema {
       processStrategy = (input) => ({ ...input })
     } = options;
 
+    this.cache = new WeakMap();
     this._key = key;
     this._getId = typeof idAttribute === 'function' ? idAttribute : getDefaultGetId(idAttribute);
     this._idAttribute = idAttribute;
